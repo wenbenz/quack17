@@ -1,26 +1,45 @@
-var synth = new Tone.Synth();
 var vol = new Tone.Volume(-10);
-synth.chain(vol, Tone.Master); //chain events
+var music = { };
+var scale;
+
+getMonosynth().chain(vol, Tone.Master);
+getSynth().chain(vol, Tone.Master); //chain events
+
+$(document).ready(function() {
+  music.timeSignature = 4;
+});
 
 function prepareBeat(input) {
-  console.log("button pressed!");
-  synth.triggerAttackRelease("C4", "4n");
-  var tempo = parseTempo(input);
-  console.log("Avg Length: " + tempo);
-  loopBeat(tempo);
+  scale = getScale(0, 0, "major");
+  $.getScript("Tempo.js", function() {
+    music.bpm = parseTempo(input);
+    console.log("BPM: " + music.bpm);
+    music.beatCounter = 0;
+    loopBeat();
+  });
 }
 
-function loopBeat(bpm) {
-
+function loopBeat() {
+  music.loop = setInterval(beat, 60000 / music.bpm);
 }
 
-function parseTempo(input) {
-  var avgLength = 0;
-  for (i in input) {
-    avgLength += input[i].length;
+function beat() {
+  if (music.beatCounter == 0) {
+    //Do a big thunk
+    getMonosynth().triggerAttackRelease("E4", "1n");
+    getSynth().triggerAttackRelease("D4", "4n");
   }
-  avgLength /= input.length;
-  return avgLength;
+  else {
+    //Do a small thunk
+    //getMonosynth().triggerAttackRelease("C5", "8n");
+    getSynth().triggerAttackRelease("C4", "4n");
+  }
+  music.beatCounter++;
+  music.beatCounter %= music.timeSignature;
+}
+
+function stop() {
+  clearInterval(music.loop);
 }
 
 function adjustVolume(data) {
@@ -30,4 +49,8 @@ function adjustVolume(data) {
   else {
     vol.volume.value = data.value*40 - 40;
   }
+}
+
+function getMusic() {
+  return music;
 }
