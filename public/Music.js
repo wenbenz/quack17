@@ -1,13 +1,16 @@
-var synth = new Tone.Synth();
 var vol = new Tone.Volume(-10);
-var music = {};
-synth.chain(vol, Tone.Master); //chain events
+var music = { };
+var scale;
+
+getMonosynth().chain(vol, Tone.Master);
+getSynth().chain(vol, Tone.Master); //chain events
 
 $(document).ready(function() {
   music.timeSignature = 4;
 });
 
 function prepareBeat(input) {
+  scale = getScale(0, 0, "major");
   $.getScript("Tempo.js", function() {
     music.bpm = parseTempo(input);
     console.log("BPM: " + music.bpm);
@@ -23,11 +26,13 @@ function loopBeat() {
 function beat() {
   if (music.beatCounter == 0) {
     //Do a big thunk
-    synth.triggerAttackRelease("D4", "4n");
+    getMonosynth().triggerAttackRelease("E4", "1n");
+    getSynth().triggerAttackRelease("D4", "4n");
   }
   else {
     //Do a small thunk
-    synth.triggerAttackRelease("C4", "4n");
+    //getMonosynth().triggerAttackRelease("C5", "8n");
+    getSynth().triggerAttackRelease("C4", "4n");
   }
   music.beatCounter++;
   music.beatCounter %= music.timeSignature;

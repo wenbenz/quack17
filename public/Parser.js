@@ -35,8 +35,8 @@ function getSylArray(word,arr,syl){
       arr.push(syl);
       syl = "";
     }
-    return getSylArray(word.substring(1),arr,syl+=first);
+    return getSylArray(word.substring(1), arr,syl+=first);
   } else {
-    return getSylArray(word.substring(1),arr,syl+=first);
+    return getSylArray(word.substring(1), arr,syl+=first);
   }
 }
