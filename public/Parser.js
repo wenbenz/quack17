@@ -29,7 +29,7 @@ $(document).ready(function() {
       sentences.push(words);                           // Push the array of words into the current sentence
     }
     console.log(sentences);
-  });
+  }
 });
 
 function getSylArray(word,arr,syl){
