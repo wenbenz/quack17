@@ -1,65 +1,30 @@
 <!doctype html>
 <html>
-    <head>
-        <title> Sampler </title>
-        <script type="text/javascript" src="js/nexusUI.js" ></script>
-        <script type="text/javascript" src="js/Tone.js" ></script>
-        <script>
-            var synth = new Tone.Synth().toMaster();
+<head>
+	<meta charset="utf8"/>
+	<link rel="stylesheet" href="style.css"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="Parser.js"></script>
 
-            nx.onload = function() {
-              button1.on('*',function(data) {
-                console.log("button pressed!");
-                synth.triggerAttackRelease("C4", "8n");
-              });
-            }
-        </script>
-    </head>
-    <body>
-      <canvas nx="button"></canvas>
-    </body>
-</html>
-
-
-<!-- <!DOCTYPE html>
- <html>
-   <head>
-<meta charset="utf‐8">
-<title> Hello web audio </title> </head>
+</head>
 <body>
-   </body>
-   <script>
-   //create the context for the web audio
-      var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+	<h1>Text Parsing Text </h1>
 
-      var volume = audioCtx.createGain();
-      volume.connect(audioCtx.destination);
+	<button id="submitButton">Submit </button>			<!--View and Submit buttons-->
 
-      // var panner = new Tone.Panner(1);
+	<form>
+		<fieldset>
+			<!--Textfield for the user's input text-->
+			<!--Each textfield has a label above it and an ID for accessing it's contents-->
 
-      // volume.connect(panner);
-      //create, tune, start and connect each oscillator sinea, sineb and sinec
-      var sinea = audioCtx.createOscillator();
-      sinea.frequency.value = 440;
-      sinea.type = "square";
-      sinea.start();
-      sinea.connect(volume);
+			<div>
+				<label for="name">Text:</label><br/>
+				<textarea id="textBox" style="width:300px"></textarea>
+			</div>
 
-      var sineb = audioCtx.createOscillator();
-      sineb.frequency.value = 523.25;
-      sineb.type = "square";
-      sineb.start();
-      sineb.connect(volume);
+		</fieldset><br/>
+	</form>
 
-      var sinec = audioCtx.createOscillator();
-      sinec.frequency.value = 698.46;
-      sinec.type = "square";
-      sinec.start();
-      sinec.connect(volume);
 
-      volume.gain.value=0.05;
-
-      // var lfo = new Tone.LFO("4n", 400, 4000);
-      // lfo.connect(volume);
-   </script>
-</html> -->
+</body>
+</html>
