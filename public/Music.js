@@ -1,11 +1,12 @@
 var volSynth = new Tone.Volume(-10);
 var volMonosynth = new Tone.Volume(volSynth.volume.value - 18);
 var volTomsynth = new Tone.Volume(volSynth.volume.value - 12);
-var volKicksynth = new Tone.Volume(volSynth.volume.value - 8);
+var volKicksynth = new Tone.Volume(volSynth.volume.value + 10);
 var volNoisesynth = new Tone.Volume(volSynth.volume.value - 11);
 
 var music = {};
 var scale;
+let DIVISION_CONST = 24;
 
 //reverb effect on high hats
 //var freeverb = new Tone.JCReverb(0.001);
@@ -36,22 +37,20 @@ function prepareBeat(input) {
 }
 
 function loopBeat() {
-  music.loop = setInterval(beat, 60000 / music.bpm);
+  music.loop = setInterval(beat, 10000 / music.bpm);
 }
 
 function beat() {
-  if (music.beatCounter === 3) {
-    getTomsynth().triggerAttackRelease("A3", "4n");
+  if (music.beatCounter === 0) {
+    getKicksynth().triggerAttackRelease("8n");
   }
-  // if (music.beatCounter % 2 === 1) {
-  // }
-  if (music.beatCounter == 0) {
-    //Do a big thunk
-    getMonosynth().triggerAttackRelease(music.scales[music.currentScale[2]], "1n");
-    getKicksynth().triggerAttackRelease("F1", "8n");
+  else if (music.beatCounter % (DIVISION_CONST / (music.timeSignature * 2)) === 0) {
+    getNoisesynth().triggerAttackRelease("8n");
+    if (music.beatCounter % (DIVISION_CONST / music.timeSignature) === 0) {
+      getTomsynth().triggerAttackRelease("A3", "4n");
+    }
   }
-  getNoisesynth().triggerAttackRelease("8n");
-  music.beatCounter = (music.beatCounter + 1) % music.timeSignature;
+  music.beatCounter = (music.beatCounter + 1) % DIVISION_CONST;
   if (music.beatCounter === 0)
     music.currentScale = (music.currentScale + 1) % music.scales.length;
 }
@@ -62,10 +61,10 @@ function stop() {
 
 function adjustVolume(data) {
   if (data.value === 0) {
-    vol.volume.value = -100;
+    volSynth.volume.value = -100;
   }
   else {
-    vol.volume.value = data.value*40 - 40;
+    volSynth.volume.value = data.value*40 - 40;
   }
 }
 
