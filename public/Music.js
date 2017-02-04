@@ -47,9 +47,7 @@ function beat() {
   // }
   if (music.beatCounter == 0) {
     //Do a big thunk
-    console.log(scale[2]);
-    console.log(scale[1]);
-    getMonosynth().triggerAttackRelease(scale[2], "1n");
+    getMonosynth().triggerAttackRelease(music.scales[music.currentScale[2]], "1n");
     getKicksynth().triggerAttackRelease("F1", "8n");
   }
   getNoisesynth().triggerAttackRelease("8n");

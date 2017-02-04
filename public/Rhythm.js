@@ -7,7 +7,7 @@ var tripplet = min/music.bpm/3;
 
 function getWordRhythm(word) {
 	var syls = word.length;
-	switch(syls){
+	switch(syls) {
 
 	}
 }
@@ -16,6 +16,6 @@ function parseRhythms() {
 	
 }
 
-function makeBars(){
+function makeBars() {
 
 }
