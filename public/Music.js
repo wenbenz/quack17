@@ -6,7 +6,7 @@ var volNoisesynth = new Tone.Volume(volSynth.volume.value - 11);
 
 var music = {};
 var scale;
-let DIVISION_CONST = 24;
+let DIVISION_CONST = 240;
 
 //reverb effect on high hats
 //var freeverb = new Tone.JCReverb(0.001);
@@ -32,12 +32,22 @@ function prepareBeat(input) {
 
   music.rhythmQueue = parseRhythms(input);
   console.log("Rhythms: " + music.rhythmQueue);
+  music.nextNoteTimer = 0;
+
+  music.noteQueue = getNotes(input);
+  console.log("Notes: " + music.noteQueue);
 
   loopBeat();
 }
 
+function getNotes() {
+  var arr = [];
+  arr.push("C4");
+  return arr;
+}
+
 function loopBeat() {
-  music.loop = setInterval(beat, 10000 / music.bpm);
+  music.loop = setInterval(beat, 1000 / music.bpm);
 }
 
 function beat() {
@@ -49,6 +59,23 @@ function beat() {
     if (music.beatCounter % (DIVISION_CONST / music.timeSignature) === 0) {
       getTomsynth().triggerAttackRelease("A3", "4n");
     }
+  }
+
+  if (music.rhythmQueue[0] === "0n") {
+    music.nextNoteTimer = 0;
+  }
+  if (music.beatCounter === music.nextNoteTimer) {
+    console.log("Note: " + music.noteQueue[0] + ", " + music.rhythmQueue[0]);
+    if (music.rhythmQueue[0] === "0n") {
+      music.rhythmQueue.shift();
+    }
+    getSynth().triggerAttackRelease(music.noteQueue[0], music.rhythmQueue[0]);
+    music.nextNoteTimer = (music.beatCounter + (DIVISION_CONST / parseInt(music.rhythmQueue[0].substring(0, music.rhythmQueue.length - 1)))) % DIVISION_CONST;
+    console.log(music.nextNoteTimer);
+    //music.noteQueue.shift();
+    music.rhythmQueue.shift();
+    if (music.noteQueue.length === 0 || music.rhythmQueue.length === 0)
+      stop();
   }
   music.beatCounter = (music.beatCounter + 1) % DIVISION_CONST;
   if (music.beatCounter === 0)
