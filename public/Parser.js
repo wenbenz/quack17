@@ -25,7 +25,6 @@ $(document).ready(function() {
 EVERYTHING BELOW THIS POINT IS UNCERTAIN (and most likely will be removed and/or modified)
 ----------------------------------*/
 
-
 function spaceParser() {
   var string = $("#textBox").val();
   var wordsArray = string.split(" ");
@@ -47,7 +46,7 @@ function avgSentenceLen() {
     var tempSentence = sentenceArray[i].split(" ");
 
     if (tempSentence[0] == " ")
-      tempSentence = tempSentence.subtring(1);
+      tempSentence = tempSentence.substring(1);
 
     sentenceLenArr[i] = tempSentence.length;
     sum += sentenceLenArr[i];
