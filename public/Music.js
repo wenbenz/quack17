@@ -1,38 +1,40 @@
 var synth = new Tone.Synth();
 var vol = new Tone.Volume(-10);
-var beatLoop;
-var barCounter;
-var timeSignature = 4;
+var music = {};
 synth.chain(vol, Tone.Master); //chain events
 
+$(document).ready(function() {
+  music.timeSignature = 4;
+});
+
 function prepareBeat(input) {
-  var bpm;
   $.getScript("Tempo.js", function() {
-    bpm = parseTempo(input);
-    console.log("BPM: " + bpm);
-    barCounter = 0;
-    loopBeat(bpm);
+    music.bpm = parseTempo(input);
+    console.log("BPM: " + music.bpm);
+    music.beatCounter = 0;
+    loopBeat();
   });
 }
 
-function loopBeat(bpm) {
-  beatLoop = setInterval(beat, 60000 / bpm);
+function loopBeat() {
+  music.loop = setInterval(beat, 60000 / music.bpm);
 }
 
 function beat() {
-  if (barCounter == 0) {
+  if (music.beatCounter == 0) {
+    //Do a big thunk
     synth.triggerAttackRelease("D4", "4n");
   }
   else {
     //Do a small thunk
     synth.triggerAttackRelease("C4", "4n");
   }
-  barCounter++;
-  barCounter %= timeSignature;
+  music.beatCounter++;
+  music.beatCounter %= music.timeSignature;
 }
 
 function stop() {
-  clearInterval(beatLoop);
+  clearInterval(music.loop);
 }
 
 function adjustVolume(data) {
@@ -42,4 +44,8 @@ function adjustVolume(data) {
   else {
     vol.volume.value = data.value*40 - 40;
   }
+}
+
+function getMusic() {
+  return music;
 }
