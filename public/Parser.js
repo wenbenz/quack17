@@ -1,9 +1,9 @@
 function parseInput() {
   var sentences = [];
   var textInput = $("#textBox").val();                  // Retrieve the input from the webpage
-  textInput = textInput.replace(".", "./~");
-  textInput = textInput.replace("!", "!/~");
-  textInput = textInput.replace("?", "?/~");
+  textInput = textInput.split(".").join("./~");
+  textInput = textInput.split("!").join("./~");
+  textInput = textInput.split("?").join("./~");
   var sentenceArray = textInput.split("/~");           // Split the input into an array of sentences
   sentenceArray.pop();
   for (var i = 0; i < sentenceArray.length; i++) {                            // Loop through every sentence
