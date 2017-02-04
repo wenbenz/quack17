@@ -7,19 +7,32 @@
         <script src="js/Tone.js" ></script>
         <script src="Parser.js" ></script>
         <script src="Music.js" ></script>
+        <script src="Tempo.js" ></script>
         <script>
-            nx.onload = function() {
-              comment1.val.text = "This is my comment";
-              comment1.draw();
-              textBox.val = "This is my message";
-              submitButton.on('*', function() {
-                var input = parseInput();
-                prepareBeat(input);
-              });
-              volumeSlider.on('*', function(data) { adjustVolume(data); });
-              // vol.mute(true);
-              // vol.Volume(-50); //data in volumeSlider is a float from 0 - 1; max volume would be 0dBs, min would be -50
-            }
+          var playing = false, clickable = true;
+          nx.onload = function() {
+            comment1.val.text = "This is my comment";
+            comment1.draw();
+            textBox.val = "This is my message";
+            submitButton.on('*', function() {
+              if (clickable) {
+                clickable = false;
+                playing = !playing;
+                if (playing) {
+                  var input = parseInput();
+                  prepareBeat(input);
+                  setTimeout(function() { clickable = true; }, 500);
+                }
+                else {
+                  stop();
+                  setTimeout(function() { clickable = true; }, 500);
+                }
+              }
+            });
+            volumeSlider.on('*', function(data) { adjustVolume(data); });
+            // vol.mute(true);
+            // vol.Volume(-50); //data in volumeSlider is a float from 0 - 1; max volume would be 0dBs, min would be -50
+          }
         </script>
     </head>
     <body>
