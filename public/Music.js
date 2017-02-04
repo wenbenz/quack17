@@ -1,16 +1,18 @@
-var vol = new Tone.Volume(-10);
+var volSynth = new Tone.Volume(-10);
+var volMonosynth = new Tone.Volume(volSynth.volume.value - 25);
 var music = { };
 var scale;
 
-getMonosynth().chain(vol, Tone.Master);
-getSynth().chain(vol, Tone.Master); //chain events
+getMonosynth().chain(volMonosynth, Tone.Master);
+getSynth().chain(volSynth, Tone.Master); //chain events
 
 $(document).ready(function() {
   music.timeSignature = 4;
 });
 
 function prepareBeat(input) {
-  scale = getScale(0, 4, "pentatonic");
+  scale = getScale(0, 4, "majorPentatonic");
+  console.log(scale);
   $.getScript("Tempo.js", function() {
     music.bpm = parseTempo(input);
     console.log("BPM: " + music.bpm);
@@ -26,6 +28,8 @@ function loopBeat() {
 function beat() {
   if (music.beatCounter == 0) {
     //Do a big thunk
+    console.log(scale[2]);
+    console.log(scale[1]);
     getMonosynth().triggerAttackRelease(scale[2], "1n");
     getSynth().triggerAttackRelease(scale[1], "4n");
   }
