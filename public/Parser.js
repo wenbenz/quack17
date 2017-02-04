@@ -1,6 +1,5 @@
-var sentences = [];
-
 function parseInput() {
+  var sentences = [];
   var textInput = $("#textBox").val();                  // Retrieve the input from the webpage
   textInput = textInput.replace(".", "./~");
   textInput = textInput.replace("!", "!/~");
