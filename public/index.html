@@ -5,18 +5,34 @@
         <script type="text/javascript" src="js/nexusUI.js" ></script>
         <script type="text/javascript" src="js/Tone.js" ></script>
         <script>
-            var synth = new Tone.Synth().toMaster();
+            var synth = new Tone.Synth();
+
+            var vol = new Tone.Volume(-10);
+
+            synth.chain(vol, Tone.Master); //chain events
 
             nx.onload = function() {
-              button1.on('*',function(data) {
+              playButton.on('*',function(data) {
                 console.log("button pressed!");
-                synth.triggerAttackRelease("C4", "8n");
+                synth.triggerAttackRelease("C4", "4n");
+              });
+              volumeSlider.on('*',function(data) {
+                console.log("slider used! data is " + data.value);
+                if (data.value === 0) {
+                  vol.volume.value = -100;
+                }
+                else {
+                  vol.volume.value = data.value*40 - 40;
+                }
+                // vol.mute(true);
+                // vol.Volume(-50); //data in volumeSlider is a float from 0 - 1; max volume would be 0dBs, min would be -50
               });
             }
         </script>
     </head>
     <body>
-      <canvas nx="button"></canvas>
+      <canvas nx="button" id="playButton" ></canvas>
+      <canvas nx="slider" id="volumeSlider"></canvas>
     </body>
 </html>
 
