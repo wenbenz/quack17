@@ -3,7 +3,6 @@ var vol = new Tone.Volume(-10);
 synth.chain(vol, Tone.Master); //chain events
 
 function prepareBeat(input) {
-  console.log("button pressed!");
   synth.triggerAttackRelease("C4", "4n");
   var tempo = parseTempo(input);
   console.log("Avg Length: " + tempo);

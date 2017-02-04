@@ -13,7 +13,8 @@
               comment1.draw();
               textBox.val = "This is my message";
               submitButton.on('*', function() {
-                prepareBeat(parseInput());
+                var input = parseInput();
+                prepareBeat(input);
               });
               volumeSlider.on('*', function(data) { adjustVolume(data); });
               // vol.mute(true);
