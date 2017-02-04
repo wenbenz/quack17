@@ -6,7 +6,7 @@ var volNoisesynth = new Tone.Volume(volSynth.volume.value - 11);
 
 var music = {};
 var scale;
-let DIVISION_CONST = 24;
+let DIVISION_CONST = 48;
 
 //reverb effect on high hats
 //var freeverb = new Tone.JCReverb(0.001);
@@ -47,7 +47,7 @@ function getNotes() {
 }
 
 function loopBeat() {
-  music.loop = setInterval(beat, 10000 / music.bpm);
+  music.loop = setInterval(beat, 5000 / music.bpm);
 }
 
 function beat() {
@@ -63,7 +63,8 @@ function beat() {
   if (music.beatCounter === music.nextNoteTimer) {
     console.log("Note: " + music.noteQueue[0] + ", " + music.rhythmQueue[0]);
     getSynth().triggerAttackRelease(music.noteQueue[0], music.rhythmQueue[0]);
-    music.nextNoteTimer = (music.beatCounter + parseInt(music.rhythmQueue[0].substring(0, music.rhythmQueue[0].length - 1))) % DIVISION_CONST;
+    music.nextNoteTimer = (music.beatCounter + (DIVISION_CONST / parseInt(music.rhythmQueue[0].substring(0, music.rhythmQueue.length - 1)))) % DIVISION_CONST;
+    console.log(music.nextNoteTimer);
     //music.noteQueue.shift();
     music.rhythmQueue.shift();
     if (music.noteQueue.length === 0 || music.rhythmQueue.length === 0)

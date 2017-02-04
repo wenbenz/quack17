@@ -4,14 +4,14 @@ function parseRhythms(input) {
 		for (j in input[i]) {
 			console.log("Word: " + input[i][j]);
 			console.log(input[i][j].length);
-			if (input[i][j].length < 7) {
+			if (input[i][j].length < 4) {
 				for (k in input[i][j]) {
 					rhythmQueue.push((4 * input[i][j].length).toString() + "n");
 				}
 			}
 			else {
 				for (k in 6) {
-					rhythmQueue.push("24n");
+					rhythmQueue.push("16n");
 				}
 			}
 
