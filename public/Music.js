@@ -14,12 +14,15 @@ function prepareBeat(input) {
   music.scales = [getScale(0, 4, "majorPentatonic"), getScale(7, 4, "majorPentatonic"), getScale(9, 4, "minorPentatonic"), getScale(5, 4, "majorPentatonic")];
   music.currentScale = 0;
   console.log(music.scales[music.currentScale]);
-  $.getScript("Tempo.js", function() {
-    music.bpm = parseTempo(input);
-    console.log("BPM: " + music.bpm);
-    music.beatCounter = 0;
-    loopBeat();
-  });
+
+  music.bpm = parseTempo(input);
+  console.log("BPM: " + music.bpm);
+  music.beatCounter = 0;
+
+  music.rhythmQueue = parseRhythms(input);
+  console.log("Rhythms: " + music.rhythmQueue);
+
+  loopBeat();
 }
 
 function loopBeat() {
