@@ -21,14 +21,18 @@ $(document).ready(function() {
 });
 
 function prepareBeat(input) {
-  scale = getScale(0, 4, "majorPentatonic");
-  console.log(scale);
-  $.getScript("Tempo.js", function() {
-    music.bpm = parseTempo(input);
-    console.log("BPM: " + music.bpm);
-    music.beatCounter = 0;
-    loopBeat();
-  });
+  music.scales = [getScale(0, 4, "majorPentatonic"), getScale(7, 4, "majorPentatonic"), getScale(9, 4, "minorPentatonic"), getScale(5, 4, "majorPentatonic")];
+  music.currentScale = 0;
+  console.log(music.scales[music.currentScale]);
+
+  music.bpm = parseTempo(input);
+  console.log("BPM: " + music.bpm);
+  music.beatCounter = 0;
+
+  music.rhythmQueue = parseRhythms(input);
+  console.log("Rhythms: " + music.rhythmQueue);
+
+  loopBeat();
 }
 
 function loopBeat() {
@@ -49,10 +53,9 @@ function beat() {
     getKicksynth().triggerAttackRelease("F1", "8n");
   }
   getNoisesynth().triggerAttackRelease("8n");
-
-
-  music.beatCounter++;
-  music.beatCounter %= music.timeSignature;
+  music.beatCounter = (music.beatCounter + 1) % music.timeSignature;
+  if (music.beatCounter === 0)
+    music.currentScale = (music.currentScale + 1) % music.scales.length;
 }
 
 function stop() {
