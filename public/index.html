@@ -2,8 +2,10 @@
 <html>
     <head>
         <title> Sampler </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script type="text/javascript" src="js/nexusUI.js" ></script>
         <script type="text/javascript" src="js/Tone.js" ></script>
+        <script type="text/javascript" src="Parser.js" ></script>
         <script>
             var synth = new Tone.Synth();
 
@@ -14,7 +16,7 @@
             nx.onload = function() {
               comment1.val.text = "This is my comment";
               comment1.draw();
-              playButton.on('*',function(data) {
+              submitButton.on('*',function(data) {
                 console.log("button pressed!");
                 synth.triggerAttackRelease("C4", "4n");
               });
@@ -33,7 +35,7 @@
         </script>
     </head>
     <body>
-      <canvas nx="button" id="playButton" ></canvas>
+      <canvas nx="button" id="submitButton" ></canvas>
       <canvas nx="slider" id="volumeSlider"></canvas>
       <canvas nx="comment"></canvas>
       <canvas nx="message"></canvas>
