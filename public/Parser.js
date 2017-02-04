@@ -1,7 +1,7 @@
 var sentences = [];
 
 $(document).ready(function() {
-  $("#submitButton").click(function() {
+  function parseInput() {
     console.log("Button is clicked");
     var textInput = $("#textBox").val();                  // Retrieve the input from the webpage
     textInput = "Hello world! This is a test? I don't like rain.";
