@@ -4,22 +4,38 @@ $(document).ready(function() {
   $("#submitButton").click(function() {
     var textInput = $("#textBox").val();                  // Retrieve the input from the webpage
     var sentenceArray = textInput.split(".!?");           // Split the input into an array of sentences
-    for (i in sentenceArray) {                            // Loop through every sentence
+    for (var i = 0; i < sentenceArray.length; i++) {                            // Loop through every sentence
       while (sentenceArray[i].substring(1, 1) === " ") {  // While there is whitespace in front of the sentence, remove it
         sentenceArray[i] = sentenceArray[i].substring(1);
       }
       var words = [];
       var wordArray = sentenceArray[i].split(" ");        // Split the current sentence into an array of words
-      for (j in wordArray) {                              // Loop through every word
+      for (var j = 0; j < wordArray.length; j++) {                              // Loop through every word
         //parse syllables somehow here
         //var syllables = wordArray[i];                   // Split the current word into an array of syllables
         //split syllables somehow
-        words[j].push(syllables);                         // Push the array of syllables into the current word
+        var syllables = [];
+        for (var k = 0; k < wordArray[j].length; k++){
+          var syllableArray = getSylArray(wordArray[j]);
+          var syllables.push(syllableArray);
+        }
+        words.push(syllables);                         // Push the array of syllables into the current word
       }
-      sentences[i].push(words);                           // Push the array of words into the current sentence
+      sentences.push(words);                           // Push the array of words into the current sentence
     }
   });
 });
+
+function getSylArray(word,arr,syl){
+  var first = word.substring(0,1);
+  if(word.length===0){
+    return arr;
+  }else if(first==="a"||first==="e"||first==="i"||first==="o"||first==="u"||first==="y"){
+    getSylArray(word.substring(1),arr[arr.length].push(syl),"");
+  } else {
+    getSylArray(word.substring(1),arr,syl+=first);
+  }
+}
 
 /*----------------------------------
 EVERYTHING BELOW THIS POINT IS UNCERTAIN (and most likely will be removed and/or modified)
