@@ -32,8 +32,18 @@ function prepareBeat(input) {
 
   music.rhythmQueue = parseRhythms(input);
   console.log("Rhythms: " + music.rhythmQueue);
+  music.nextNoteTimer = 0;
+
+  music.noteQueue = getNotes(input);
+  console.log("Notes: " + music.noteQueue);
 
   loopBeat();
+}
+
+function getNotes() {
+  var arr = [];
+  arr.push("C4");
+  return arr;
 }
 
 function loopBeat() {
@@ -49,6 +59,15 @@ function beat() {
     if (music.beatCounter % (DIVISION_CONST / music.timeSignature) === 0) {
       getTomsynth().triggerAttackRelease("A3", "4n");
     }
+  }
+  if (music.beatCounter === music.nextNoteTimer) {
+    console.log("Note: " + music.noteQueue[0] + ", " + music.rhythmQueue[0]);
+    getSynth().triggerAttackRelease(music.noteQueue[0], music.rhythmQueue[0]);
+    music.nextNoteTimer = (music.beatCounter + parseInt(music.rhythmQueue[0].substring(0, music.rhythmQueue[0].length - 1))) % DIVISION_CONST;
+    //music.noteQueue.shift();
+    music.rhythmQueue.shift();
+    if (music.noteQueue.length === 0 || music.rhythmQueue.length === 0)
+      stop();
   }
   music.beatCounter = (music.beatCounter + 1) % DIVISION_CONST;
   if (music.beatCounter === 0)
