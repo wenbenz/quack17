@@ -4,8 +4,12 @@ $(document).ready(function() {
   $("#submitButton").click(function() {
     console.log("Button is clicked");
     var textInput = $("#textBox").val();                  // Retrieve the input from the webpage
-    console.log("textInput is " + textInput);
-    var sentenceArray = textInput.split(".");           // Split the input into an array of sentences
+    textInput = "Hello my name is Avery. Am I developing a web application? It seems like it will be very cool! Enjoy our work.";
+    console.log(textInput);
+    textInput = textInput.replace(".", "./~");
+    textInput = textInput.replace("!", "!/~");
+    textInput = textInput.replace("?", "?/~");
+    var sentenceArray = textInput.split("/~");           // Split the input into an array of sentences
     for (var i = 0; i < sentenceArray.length; i++) {                            // Loop through every sentence
       while (sentenceArray[i].substring(1, 1) === " ") {  // While there is whitespace in front of the sentence, remove it
         sentenceArray[i] = sentenceArray[i].substring(1);
@@ -18,17 +22,20 @@ $(document).ready(function() {
         //split syllables somehow
         var syllables = [];
         for (var k = 0; k < wordArray[j].length; k++){
-          var syllableArray = getSylArray(wordArray[j]);
-          var syllables.push(syllableArray);
+          var syllableArray = getSylArray(wordArray[j], [], "");
+          syllables.push(syllableArray);
         }
         words.push(syllables);                         // Push the array of syllables into the current word
       }
       sentences.push(words);                           // Push the array of words into the current sentence
     }
+    console.log("Reached the end");
+    console.log(sentences);
   });
 });
 
 function getSylArray(word,arr,syl){
+  console.log("Reached sylArray");
   var first = word.substring(0,1);
   if(word.length===0){
     return arr;
