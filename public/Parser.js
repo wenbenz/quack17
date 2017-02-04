@@ -4,7 +4,6 @@ $(document).ready(function() {
   function parseInput() {
     console.log("Button is clicked");
     var textInput = $("#textBox").val();                  // Retrieve the input from the webpage
-    textInput = "Hello world! This is a test? I don't like rain.";
     textInput = textInput.replace(".", "./~");
     textInput = textInput.replace("!", "!/~");
     textInput = textInput.replace("?", "?/~");
@@ -25,7 +24,7 @@ $(document).ready(function() {
       }
       sentences.push(words);                           // Push the array of words into the current sentence
     }
-    console.log(sentences);
+    return sentences;
   }
 });
 
