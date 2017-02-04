@@ -2,6 +2,7 @@ var sentences = [];
 
 $(document).ready(function() {
   $("#submitButton").click(function() {
+    console.log("Button is clicked");
     var textInput = $("#textBox").val();                  // Retrieve the input from the webpage
     textInput = "Hello my name is Avery. Am I developing a web application? It seems like it will be very cool! Enjoy our work.";
     console.log(textInput);
@@ -17,7 +18,7 @@ $(document).ready(function() {
       var wordArray = sentenceArray[i].split(" ");        // Split the current sentence into an array of words
       for (var j = 0; j < wordArray.length; j++) {                              // Loop through every word
         //parse syllables somehow here
-        //var syllables = wordArray[i];                   // Split the current word into an array of syllables
+        // var syllables = wordArray[i];                   // Split the current word into an array of syllables
         //split syllables somehow
         var syllables = [];
         for (var k = 0; k < wordArray[j].length; k++){
