@@ -9,18 +9,34 @@ h1 {
 	font-family: 'Quicksand', sans-serif;
 }
 
-textarea {
+
+#textBox {
 	position: relative;
 	width: 626px;
 	height: 194px;
 	resize: none;
   outline: none;
+	margin: auto;
+	width: 50%;
 	border: 5px solid black;
+}
+
+#ClickToToneIt {
+	position: absolute;
+	right: 223px;
+	top: 145px;
+	font-family: 'Quicksand', sans-serif;
 }
 
 #submitButton {
 	position: absolute;
-	
+	right: 250px;
+}
+
+#volumeSlider {
+	position: absolute;
+	right: 257px;
+	top: 180px;
 }
 
 #meter {
