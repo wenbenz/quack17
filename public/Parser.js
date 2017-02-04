@@ -1,18 +1,17 @@
 var sentences = [];
 
 $(document).ready(function() {
-  $("#submitButton").click(function() {
+  function parseInput() {
     console.log("Button is clicked");
     var textInput = $("#textBox").val();                  // Retrieve the input from the webpage
-    textInput = "Hello world! This is a test?";
-    console.log(textInput);
+    textInput = "Hello world! This is a test? I don't like rain.";
     textInput = textInput.replace(".", "./~");
     textInput = textInput.replace("!", "!/~");
     textInput = textInput.replace("?", "?/~");
     var sentenceArray = textInput.split("/~");           // Split the input into an array of sentences
     sentenceArray.pop();
     for (var i = 0; i < sentenceArray.length; i++) {                            // Loop through every sentence
-      while (sentenceArray[i].substring(1, 1) === " ") {  // While there is whitespace in front of the sentence, remove it
+      while (sentenceArray[i].substring(0, 1) === " ") {  // While there is whitespace in front of the sentence, remove it
         sentenceArray[i] = sentenceArray[i].substring(1);
       }
       var words = [];
@@ -34,18 +33,17 @@ $(document).ready(function() {
 });
 
 function getSylArray(word,arr,syl){
-  console.log("Word: " + word);
-  console.log(arr);
-  console.log("Syl: " + syl);
   var first = word.substring(0,1);
-  if(word.length===0){
-    if (syl !== "")
-      arr.push(syl);
+  var second = word.substring(1,2);
+  if(second === ""){
+    arr.push(syl+=first);
     return arr;
-  } else if(first==="a"||first==="e"||first==="i"||first==="o"||first==="u"||first==="y"){
-    syl += first;
-    arr.push(syl);
-    return getSylArray(word.substring(1),arr,"");
+  } else if(second==="a"||second==="e"||second==="i"||second==="o"||second==="u"||second==="y"){
+    if (syl !== "" && syl.length>1){
+      arr.push(syl);
+      syl = "";
+    }
+    return getSylArray(word.substring(1),arr,syl+=first);
   } else {
     return getSylArray(word.substring(1),arr,syl+=first);
   }
