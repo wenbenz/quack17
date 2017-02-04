@@ -2,8 +2,10 @@ var sentences = [];
 
 $(document).ready(function() {
   $("#submitButton").click(function() {
+    console.log("Button is clicked");
     var textInput = $("#textBox").val();                  // Retrieve the input from the webpage
-    var sentenceArray = textInput.split(".!?");           // Split the input into an array of sentences
+    console.log("textInput is " + textInput);
+    var sentenceArray = textInput.split(".");           // Split the input into an array of sentences
     for (var i = 0; i < sentenceArray.length; i++) {                            // Loop through every sentence
       while (sentenceArray[i].substring(1, 1) === " ") {  // While there is whitespace in front of the sentence, remove it
         sentenceArray[i] = sentenceArray[i].substring(1);
@@ -12,7 +14,7 @@ $(document).ready(function() {
       var wordArray = sentenceArray[i].split(" ");        // Split the current sentence into an array of words
       for (var j = 0; j < wordArray.length; j++) {                              // Loop through every word
         //parse syllables somehow here
-        //var syllables = wordArray[i];                   // Split the current word into an array of syllables
+        // var syllables = wordArray[i];                   // Split the current word into an array of syllables
         //split syllables somehow
         var syllables = [];
         for (var k = 0; k < wordArray[j].length; k++){
