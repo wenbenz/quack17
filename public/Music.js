@@ -10,7 +10,7 @@ $(document).ready(function() {
 });
 
 function prepareBeat(input) {
-  scale = getScale(0, 0, "major");
+  scale = getScale(0, 4, "pentatonic");
   $.getScript("Tempo.js", function() {
     music.bpm = parseTempo(input);
     console.log("BPM: " + music.bpm);
@@ -26,13 +26,13 @@ function loopBeat() {
 function beat() {
   if (music.beatCounter == 0) {
     //Do a big thunk
-    getMonosynth().triggerAttackRelease("E4", "1n");
-    getSynth().triggerAttackRelease("D4", "4n");
+    getMonosynth().triggerAttackRelease(scale[2], "1n");
+    getSynth().triggerAttackRelease(scale[1], "4n");
   }
   else {
     //Do a small thunk
     //getMonosynth().triggerAttackRelease("C5", "8n");
-    getSynth().triggerAttackRelease("C4", "4n");
+    getSynth().triggerAttackRelease(scale[0], "4n");
   }
   music.beatCounter++;
   music.beatCounter %= music.timeSignature;
