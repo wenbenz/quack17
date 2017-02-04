@@ -1,11 +1,29 @@
-
+var sentences = [];
 
 $(document).ready(function() {
   $("#submitButton").click(function() {
-    spaceParser();
-    avgSentenceLen();
+    var textInput = $("#textBox").val();                  // Retrieve the input from the webpage
+    var sentenceArray = textInput.split(".!?");           // Split the input into an array of sentences
+    for (i in sentenceArray) {                            // Loop through every sentence
+      while (sentenceArray[i].substring(1, 1) === " ") {  // While there is whitespace in front of the sentence, remove it
+        sentenceArray[i] = sentenceArray[i].substring(1);
+      }
+      var words = [];
+      var wordArray = sentenceArray[i].split(" ");        // Split the current sentence into an array of words
+      for (j in wordArray) {                              // Loop through every word
+        //parse syllables somehow here
+        //var syllables = wordArray[i];                   // Split the current word into an array of syllables
+        //split syllables somehow
+        words[j].push(syllables);                         // Push the array of syllables into the current word
+      }
+      sentences[i].push(words);                           // Push the array of words into the current sentence
+    }
   });
 });
+
+/*----------------------------------
+EVERYTHING BELOW THIS POINT IS UNCERTAIN (and most likely will be removed and/or modified)
+----------------------------------*/
 
 
 function spaceParser() {
