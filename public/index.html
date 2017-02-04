@@ -1,30 +1,37 @@
 <!doctype html>
 <html>
-<head>
-	<meta charset="utf8"/>
-	<link rel="stylesheet" href="style.css"/>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src="Parser.js"></script>
+    <head>
+        <title> Sampler </title>
+        <script type="text/javascript" src="js/nexusUI.js" ></script>
+        <script type="text/javascript" src="js/Tone.js" ></script>
+        <script>
+            var synth = new Tone.Synth();
 
-</head>
-<body>
-	<h1>Text Parsing Text </h1>
+            var vol = new Tone.Volume(-10);
 
-	<button id="submitButton">Submit </button>			<!--View and Submit buttons-->
+            synth.chain(vol, Tone.Master); //chain events
 
-	<form>
-		<fieldset>
-			<!--Textfield for the user's input text-->
-			<!--Each textfield has a label above it and an ID for accessing it's contents-->
-
-			<div>
-				<label for="name">Text:</label><br/>
-				<textarea id="textBox" style="width:300px"></textarea>
-			</div>
-
-		</fieldset><br/>
-	</form>
-
-
-</body>
+            nx.onload = function() {
+              playButton.on('*',function(data) {
+                console.log("button pressed!");
+                synth.triggerAttackRelease("C4", "4n");
+              });
+              volumeSlider.on('*',function(data) {
+                console.log("slider used! data is " + data.value);
+                if (data.value === 0) {
+                  vol.volume.value = -100;
+                }
+                else {
+                  vol.volume.value = data.value*40 - 40;
+                }
+                // vol.mute(true);
+                // vol.Volume(-50); //data in volumeSlider is a float from 0 - 1; max volume would be 0dBs, min would be -50
+              });
+            }
+        </script>
+    </head>
+    <body>
+      <canvas nx="button" id="playButton" ></canvas>
+      <canvas nx="slider" id="volumeSlider"></canvas>
+    </body>
 </html>
