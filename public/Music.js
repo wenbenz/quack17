@@ -1,11 +1,12 @@
 var volSynth = new Tone.Volume(-10);
 var volMonosynth = new Tone.Volume(volSynth.volume.value - 18);
 var volTomsynth = new Tone.Volume(volSynth.volume.value - 12);
-var volKicksynth = new Tone.Volume(volSynth.volume.value - 8);
+var volKicksynth = new Tone.Volume(volSynth.volume.value + 10);
 var volNoisesynth = new Tone.Volume(volSynth.volume.value - 11);
 
 var music = {};
 var scale;
+let DIVISION_CONST = 240;
 
 //reverb effect on high hats
 //var freeverb = new Tone.JCReverb(0.001);
@@ -31,29 +32,52 @@ function prepareBeat(input) {
 
   music.rhythmQueue = parseRhythms(input);
   console.log("Rhythms: " + music.rhythmQueue);
+  music.nextNoteTimer = 0;
+
+  music.noteQueue = getNotes(input);
+  console.log("Notes: " + music.noteQueue);
 
   loopBeat();
 }
 
+function getNotes() {
+  var arr = [];
+  arr.push("C4");
+  return arr;
+}
+
 function loopBeat() {
-  music.loop = setInterval(beat, 60000 / music.bpm);
+  music.loop = setInterval(beat, 1000 / music.bpm);
 }
 
 function beat() {
-  if (music.beatCounter === 3) {
-    getTomsynth().triggerAttackRelease("A3", "4n");
+  if (music.beatCounter === 0) {
+    getKicksynth().triggerAttackRelease("8n");
   }
-  // if (music.beatCounter % 2 === 1) {
-  // }
-  if (music.beatCounter == 0) {
-    //Do a big thunk
-    console.log(scale[2]);
-    console.log(scale[1]);
-    getMonosynth().triggerAttackRelease(scale[2], "1n");
-    getKicksynth().triggerAttackRelease("F1", "8n");
+  else if (music.beatCounter % (DIVISION_CONST / (music.timeSignature * 2)) === 0) {
+    getNoisesynth().triggerAttackRelease("8n");
+    if (music.beatCounter % (DIVISION_CONST / music.timeSignature) === 0) {
+      getTomsynth().triggerAttackRelease("A3", "4n");
+    }
   }
-  getNoisesynth().triggerAttackRelease("8n");
-  music.beatCounter = (music.beatCounter + 1) % music.timeSignature;
+
+  if (music.rhythmQueue[0] === "0n") {
+    music.nextNoteTimer = 0;
+  }
+  if (music.beatCounter === music.nextNoteTimer) {
+    console.log("Note: " + music.noteQueue[0] + ", " + music.rhythmQueue[0]);
+    if (music.rhythmQueue[0] === "0n") {
+      music.rhythmQueue.shift();
+    }
+    getSynth().triggerAttackRelease(music.noteQueue[0], music.rhythmQueue[0]);
+    music.nextNoteTimer = (music.beatCounter + (DIVISION_CONST / parseInt(music.rhythmQueue[0].substring(0, music.rhythmQueue.length - 1)))) % DIVISION_CONST;
+    console.log(music.nextNoteTimer);
+    //music.noteQueue.shift();
+    music.rhythmQueue.shift();
+    if (music.noteQueue.length === 0 || music.rhythmQueue.length === 0)
+      stop();
+  }
+  music.beatCounter = (music.beatCounter + 1) % DIVISION_CONST;
   if (music.beatCounter === 0)
     music.currentScale = (music.currentScale + 1) % music.scales.length;
 }
@@ -64,10 +88,10 @@ function stop() {
 
 function adjustVolume(data) {
   if (data.value === 0) {
-    vol.volume.value = -100;
+    volSynth.volume.value = -100;
   }
   else {
-    vol.volume.value = data.value*40 - 40;
+    volSynth.volume.value = data.value*40 - 40;
   }
 }
 

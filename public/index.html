@@ -1,48 +1,66 @@
 <!doctype html>
 <html>
-    <head>
-        <title> Quacks17 </title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-        <script src="js/nexusUI.js" ></script>
-        <script src="js/Tone.js" ></script>
-        <script src="Scales.js" ></script>
-        <script src="Parser.js" ></script>
-        <script src="Instruments.js" ></script>
-        <script src="Music.js" ></script>
-        <script src="Tempo.js" ></script>
-        <script src="Rhythm.js" ></script>
-        <script src="Pitch.js" ></script>
-        <script>
-          var playing = false, clickable = true;
-          nx.onload = function() {
-            comment1.val.text = "This is my comment";
-            comment1.draw();
-            textBox.val = "This is my message";
-            submitButton.on('*', function() {
-              if (clickable) {
-                clickable = false;
-                playing = !playing;
-                if (playing) {
-                  var input = parseInput();
-                  prepareBeat(input);
-                  setTimeout(function() { clickable = true; }, 500);
-                }
-                else {
-                  stop();
-                  setTimeout(function() { clickable = true; }, 500);
-                }
-              }
-            });
-            volumeSlider.on('*', function(data) { adjustVolume(data); });
-            // vol.mute(true);
-            // vol.Volume(-50); //data in volumeSlider is a float from 0 - 1; max volume would be 0dBs, min would be -50
-          }
-        </script>
-    </head>
-    <body>
+  <title> Quacks17 </title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+  <script src="js/nexusUI.js" ></script>
+  <script src="js/Tone.js" ></script>
+  <script src="Rhythm.js" ></script>
+  <script src="Pitch.js" ></script>
+  <script src="Scales.js" ></script>
+  <script src="Instruments.js" ></script>
+  <script src="Parser.js" ></script>
+  <script src="Tempo.js" ></script>
+  <script src="Music.js" ></script>
+  <link rel="stylesheet" href="style.css">
+  <script>
+  var playing = false, clickable = true;
+  nx.onload = function() {
+    textBox.val = "This is my message";
+    submitButton.on('*', function() {
+      if (clickable) {
+        clickable = false;
+        playing = !playing;
+        if (playing) {
+          var input = parseInput();
+          prepareBeat(input);
+          setTimeout(function() { clickable = true; }, 500);
+        }
+        else {
+          stop();
+          setTimeout(function() { clickable = true; }, 500);
+        }
+      }
+    });
+    volumeSlider.on('*', function(data) { adjustVolume(data); });
+    meter.on();
+    // vol.mute(true);
+    // vol.Volume(-50); //data in volumeSlider is a float from 0 - 1; max volume would be 0dBs, min would be -50
+  }
+  </script>
+</head>
+<body>
+  <h1>Tone it</h1>
+
+  <div id="elements">
+    <div id="container1">
+      <textarea id="textBox">I may be blind. But at least. I am not balkan.</textarea>
+      <span id="ClickToToneIt">Click to Tone it</span>
+      <!-- <canvas nx="meter" id="meter"></canvas>
+      <canvas nx="waveform" id="waveform"></canvas> -->
       <canvas nx="button" id="submitButton" ></canvas>
       <canvas nx="slider" id="volumeSlider"></canvas>
-      <canvas nx="comment"></canvas>
-      <textarea id ="textBox">I may be blind. But at least. I am not balkan.</textarea>
-    </body>
+      <canvas nx="metro" id="meter"></canvas>
+    </div>
+
+  </br></br>
+
+  <div id="canvasWidgets">
+
+  </div>
+
+  <div id="infoWidgets">
+  </div>
+</div>
+</body>
 </html>

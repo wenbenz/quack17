@@ -5,6 +5,6 @@ function parseTempo(input) {
   }
   avgLength /= input.length;
   if (avgLength > 10) avgLength = 10;
-  bpm = (240 / avgLength) + 60; //Change the power to change adjustment rate --> higher denominator = slower fall
+  bpm = (240 / Math.pow(avgLength, 3/4)) + 60; //Change the power to change adjustment rate --> higher denominator = slower fall
   return bpm;
 }
