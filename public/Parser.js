@@ -17,9 +17,6 @@ $(document).ready(function() {
       var words = [];
       var wordArray = sentenceArray[i].split(" ");        // Split the current sentence into an array of words
       for (var j = 0; j < wordArray.length; j++) {                              // Loop through every word
-        //parse syllables somehow here
-        // var syllables = wordArray[i];                   // Split the current word into an array of syllables
-        //split syllables somehow
         var syllables = [];
         for (var k = 0; k < wordArray[j].length; k++){
           syllables = getSylArray(wordArray[j], [], "");
@@ -47,43 +44,4 @@ function getSylArray(word,arr,syl){
   } else {
     return getSylArray(word.substring(1),arr,syl+=first);
   }
-}
-
-/*----------------------------------
-EVERYTHING BELOW THIS POINT IS UNCERTAIN (and most likely will be removed and/or modified)
-----------------------------------*/
-
-function spaceParser() {
-  var string = $("#textBox").val();
-  var wordsArray = string.split(" ");
-
-  for (var i=0; i < wordsArray.length; i++) {
-    console.log(wordsArray[i]);
-  }
-}
-
-function avgSentenceLen() {
-  var string = $("#textBox").val();
-  var sentenceArray = string.split(".");
-  console.log(sentenceArray);
-  var sentenceLenArr = [];
-  var sum = 0;
-  console.log(sum);
-
-  for (var i=0; i<sentenceArray.length; i++) {
-    var tempSentence = sentenceArray[i].split(" ");
-
-    if (tempSentence[0] == " ")
-      tempSentence = tempSentence.substring(1);
-
-    sentenceLenArr[i] = tempSentence.length;
-    sum += sentenceLenArr[i];
-    console.log(sum);
-  }
-
-  console.log("***");
-  console.log(sum);
-  console.log(sentenceArray.length);
-  var avgLen = sum / sentenceArray.length;
-  console.log(avgLen);
 }
