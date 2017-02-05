@@ -38,7 +38,7 @@ function getWordNotes(word){
 				stress=-1;
 		}
 
-		var delta = word[syl].length % 4; // % n-1 is the max delta
+		var delta = word[syl].length; // % n-1 is the max delta
 		note = displace(note,stress,delta);
 		notes.push(note);
 	}
