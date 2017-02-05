@@ -2,7 +2,6 @@
 <html>
   <head>
   <title> Quacks17 </title>
-
   <!--Import Google Icon Font-->
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!--Import materialize.css-->
@@ -13,7 +12,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-
   <!-- *** BEGIN: MUSIC JS ***-->
   <script src="js/nexusUI.js" ></script>
   <script src="js/Tone.js" ></script>
@@ -31,6 +29,8 @@
   <script>
   var clickable = true;
   nx.onload = function() {
+    nx.colorize("#ffa000");
+    nx.colorize("border", "#000000")
     textBox.val = "This is my message";
     $("#submitButton").click(function() {
       if (clickable) {
@@ -64,20 +64,24 @@
         setTimeout(function() { clickable = true; }, 200);
       }
     });
-    volumeSlider.on('*', function(data) { adjustVolume(data); });
+    volumeSlider1.on('*', function(data) { adjustVolume(data); });
+    volumeSlider2.on('*', function(data) { adjustVolume(data); });
+    volumeSlider3.on('*', function(data) { adjustVolume(data); });
+    volumeSlider4.on('*', function(data) { adjustVolume(data); });
+    volumeSlider5.on('*', function(data) { adjustVolume(data); });
+    volumeSlider6.on('*', function(data) { adjustVolume(data); });
     // vol.mute(true);
     // vol.Volume(-50); //data in volumeSlider is a float from 0 - 1; max volume would be 0dBs, min would be -50
   }
   </script>
 </head>
 <body>
-
-  <div class="row amber z-depth-2">
+  <div class="row">
+  <div class="row amber z-depth-2" style = "background-color: #ffa000;">
     <div class="col s12 center">
       <h1>NotePadd</h1>
     </div>
   </div>
-
   <div class="container">
     <div class="row">
       <div class="col s12 m9">
@@ -86,11 +90,18 @@
       <div class="col s12 m3">
         <div class="row">
           <div class="col s12">
-            <canvas nx="slider" id="volumeSlider"></canvas>
+            <a class="waves-effect waves-light btn-large bottom" id="submitButton" style="width: 100%">&#9654;</a>
+            <a class="waves-effect waves-light btn-large bottom" style="width: 100%; background-color: #ffa000;">Toggle Major/Minor</a>
           </div>
         </div>
         <div class="row">
           <div class="col s12">
+            <canvas nx="slider" height="325px", width="25px" id="volumeSlider1"></canvas>
+            <canvas nx="slider" height="325px", width="25px" id="volumeSlider2"></canvas>
+            <canvas nx="slider" height="325px", width="25px" id="volumeSlider3"></canvas>
+            <canvas nx="slider" height="325px", width="25px" id="volumeSlider4"></canvas>
+            <canvas nx="slider" height="325px", width="25px" id="volumeSlider5"></canvas>
+            <canvas nx="slider" height="325px", width="25px" id="volumeSlider6"></canvas>
             <a class="waves-effect waves-light btn-large bottom" id="toggleButton" style="width: 100%">Major</a>
             <a class="waves-effect waves-light btn-large bottom" id="submitButton" style="width: 100%">Ready!</a>
           </div>

@@ -1,8 +1,9 @@
 var volSynth = new Tone.Volume(-10);
-var volMonosynth = new Tone.Volume(volSynth.volume.value + 5);
+var volMonosynth = new Tone.Volume(volSynth.volume.value);
 var volTomsynth = new Tone.Volume(volSynth.volume.value - 12);
 var volKicksynth = new Tone.Volume(volSynth.volume.value + 10);
 var volNoisesynth = new Tone.Volume(volSynth.volume.value - 11);
+var volKickdrum = new Tone.Volume(volSynth.volume.value + 6);
 
 var music = {};
 var scale;
@@ -16,6 +17,7 @@ getSynth().chain(volSynth, Tone.Master); //chain events
 getTomsynth().chain(volTomsynth, Tone.Master); //chain events
 getKicksynth().chain(volKicksynth, Tone.Master); //chain events
 getNoisesynth().chain( volNoisesynth, Tone.Master); //chain events
+getKickSample().chain(volKickdrum, Tone.Master);
 
 $(document).ready(function() {
   music.timeSignature = 4;
@@ -54,7 +56,7 @@ function beat() {
     return;
   }
   if (music.beatCounter === 0) {
-    getKicksynth().triggerAttackRelease("8n");
+    getKickSample().triggerAttack(0);
     getMonosynth().triggerAttackRelease(music.scales[music.currentScale][0].substring(0, music.scales[music.currentScale][0].length - 1) + "3", "1n");
   }
   else if (music.beatCounter % (DIVISION_CONST / (music.timeSignature * 2)) === 0) {
