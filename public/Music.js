@@ -5,7 +5,7 @@ var volKicksynth = new Tone.Volume(volSynth.volume.value + 10);
 var volNoisesynth = new Tone.Volume(volSynth.volume.value - 11);
 var volKickdrum = new Tone.Volume(volSynth.volume.value + 6);
 
-//Lead, Bass, Kick, Tom, Hihat, Master
+//Order: Lead, Bass, Kick, Tom, Hihat, Master
 
 var music = {};
 var scale;
@@ -64,7 +64,7 @@ function beat() {
   else if (music.beatCounter % (DIVISION_CONST / (music.timeSignature * 2)) === 0) {
     getNoisesynth().triggerAttackRelease("8n");
     if (music.beatCounter % (DIVISION_CONST / music.timeSignature) === 0) {
-      getTomsynth().triggerAttackRelease("A3", "4n");
+      getTomsynth().triggerAttackRelease("A5", "4n");
     }
   }
 
@@ -102,12 +102,12 @@ function stop() {
   $("#toggleButton").toggleClass("disabled");
 }
 
-function adjustMainVolume(data) {
+function adjustVolume(source, data) {
   if (data.value === 0) {
-    Tone.Master.volume.value = -100;
+    source.volume.value = -100;
   }
   else {
-    Tone.Master.volume.value = data.value*40 - 40;
+    source.volume.value = data.value*40 - 40;
   }
 }
 

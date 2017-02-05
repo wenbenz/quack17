@@ -12,16 +12,16 @@ var monosynth = new Tone.DuoSynth()
 // });
 
 var Tomsynth = new Tone.MembraneSynth({
-  "pitchDecay":0.05,
+  "pitchDecay":0.10,
   "octaves":0,
   "oscillator":{
     "type":"sine"
   },
   "envelope":{
-    "attack":0.001,
-    "decay":0.4,
-    "sustain":0.01,
-    "release":1.4,
+    "attack":0.004,
+    "decay":0.7,
+    "sustain":0.03,
+    "release":2,
     "attackCurve":"exponential"
   }
 });
