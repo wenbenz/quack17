@@ -29,7 +29,6 @@
   var clickable = true;
   nx.onload = function() {
     nx.colorize("#ffa000");
-    nx.colorize("border", "#000000")
     textBox.val = "This is my message";
     $("#submitButton").click(function() {
       if (clickable) {
@@ -51,7 +50,6 @@
           stop();
           setTimeout(function() { clickable = true; }, 200);
         }
-
       }
     });
     $("#toggleButton").click(function() {
@@ -67,8 +65,8 @@
         setTimeout(function() { clickable = true; }, 200);
       }
     });
-    volumeSlider1.on('*', function(data) { adjustVolume(data); });
-    volumeSlider2.on('*', function(data) { adjustVolume(data); });
+    volumeSlider1.on('*', function(data) { adjustMainVolume(data); });
+    volumeSlider2.on('*', function(data) { adjustMonosynthVolume(data); });
     volumeSlider3.on('*', function(data) { adjustVolume(data); });
     volumeSlider4.on('*', function(data) { adjustVolume(data); });
     volumeSlider5.on('*', function(data) { adjustVolume(data); });
@@ -99,12 +97,15 @@
         </div>
         <div class="row">
           <div class="col s12">
-            <canvas nx="slider" height="325px", width="25px" id="volumeSlider1"></canvas>
-            <canvas nx="slider" height="325px", width="25px" id="volumeSlider2"></canvas>
-            <canvas nx="slider" height="325px", width="25px" id="volumeSlider3"></canvas>
-            <canvas nx="slider" height="325px", width="25px" id="volumeSlider4"></canvas>
-            <canvas nx="slider" height="325px", width="25px" id="volumeSlider5"></canvas>
-            <canvas nx="slider" height="325px", width="25px" id="volumeSlider6"></canvas>
+            <canvas nx="slider" height="358px", width="30px" label = "Lead" id="volumeSlider1"></canvas>
+            <canvas nx="slider" height="358px", width="30px" label = "Bass" id="volumeSlider2"></canvas>
+            <canvas nx="slider" height="358px", width="30px" label = "Kick" id="volumeSlider3"></canvas>
+            <canvas nx="slider" height="358px", width="30px" label = "Tom"  id="volumeSlider4"></canvas>
+            <canvas nx="slider" height="358px", width="30px" label = "HiHat" id="volumeSlider5"></canvas>
+
+            <span style="float:right">
+              <canvas nx="slider" height="358px", width="50px" label = "All" id="volumeSlider6"></canvas>
+            </span>
           </div>
         </div>
       </div>

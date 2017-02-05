@@ -5,6 +5,8 @@ var volKicksynth = new Tone.Volume(volSynth.volume.value + 10);
 var volNoisesynth = new Tone.Volume(volSynth.volume.value - 11);
 var volKickdrum = new Tone.Volume(volSynth.volume.value + 6);
 
+//Lead, Bass, Kick, Tom, Hihat, Master
+
 var music = {};
 var scale;
 let DIVISION_CONST = 240;
@@ -100,12 +102,12 @@ function stop() {
   $("#toggleButton").toggleClass("disabled");
 }
 
-function adjustVolume(data) {
+function adjustMainVolume(data) {
   if (data.value === 0) {
-    volSynth.volume.value = -100;
+    Tone.Master.volume.value = -100;
   }
   else {
-    volSynth.volume.value = data.value*40 - 40;
+    Tone.Master.volume.value = data.value*40 - 40;
   }
 }
 
