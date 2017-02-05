@@ -3,14 +3,15 @@
  */
 
 var note = 2;
+var stress = 1;
 
 /* Returns a displaced note */
 function displace(note,stress,delta){
 	var dNote = stress * delta + note;
 	if(dNote<0)
 		dNote = 0;
-	else if(dNote>5)
-		dNote = 5;
+	else if(dNote>4)
+		dNote = 4;
 	return dNote;
 }
 
@@ -20,8 +21,7 @@ function displace(note,stress,delta){
  */
 function getWordNotes(word){
 	var excDestress = ["a","is","the"];
-	var excStress = ["not"]
-	var stress = 1;
+	var excStress = ["not"];
 	var notes = [];
 	for(syl in word){
 		// oscilates stress/destress
@@ -47,17 +47,14 @@ function getWordNotes(word){
 
 /**
  * Returns an array of notes from sentences
- */
+ *
 function getSentenceNotes(sentence){
 	var notes = [];
 	for(i in sentence){
-		var wordNotes = getWordNotes(sentence[i]);
-		for(j in wordNotes){
-			notes.push(wordNotes[j]);
-		}
+		notes=notes.concat(getWordNotes(sentence[i]));
 	}
 	return notes;
-}
+}*/
 
 /**
  * Returns notes of a given input
@@ -65,7 +62,10 @@ function getSentenceNotes(sentence){
 function getNotes(input){
 	var notes = [];
 	for(i in input){
-		notes=notes.concat(getSentenceNotes(input[i]));
+		if(input[0][0].constructor !== Array)
+			notes=notes.concat(getWordNotes(input[i]));
+		else
+			notes=notes.concat(getNotes(input[i]));
 	}
 	return notes;
 }
