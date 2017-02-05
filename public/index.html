@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-  <title> Quacks17 </title>
+  <title> NotePadd </title>
   <link rel="icon" href="favicon.ico">
   <!--Import Google Icon Font-->
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -27,6 +27,10 @@
   <script type="text/javascript" src="materialize/js/materialize.js"></script>
 
   <script>
+  $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal').modal();
+  });
   var clickable = true;
   nx.onload = function() {
     nx.colorize("#ffa000");
@@ -66,13 +70,13 @@
         setTimeout(function() { clickable = true; }, 200);
       }
     });
-
-    volumeSlider1.on('*', function(data) { adjustVolume(volSynth, data); });
-    volumeSlider2.on('*', function(data) { adjustVolume(volMonosynth, data); });
-    volumeSlider3.on('*', function(data) { adjustVolume(volKickdrum, data); });
-    volumeSlider4.on('*', function(data) { adjustVolume(volTomsynth, data); });
-    volumeSlider5.on('*', function(data) { adjustVolume(volNoisesynth, data); });
-    volumeSlider6.on('*', function(data) { adjustVolume(Tone.Master, data); });
+    volumeSlider1.on('*', function(data) { adjustMainVolume(data); });
+    volumeSlider2.on('*', function(data) { adjustMonosynthVolume(data); });
+    volumeSlider3.on('*', function(data) { adjustVolume(data); });
+    volumeSlider4.on('*', function(data) { adjustVolume(data); });
+    volumeSlider5.on('*', function(data) { adjustVolume(data); });
+    volumeSlider6.on('*', function(data) { adjustVolume(data); });
+    // vol.mute(true);
     // vol.Volume(-50); //data in volumeSlider is a float from 0 - 1; max volume would be 0dBs, min would be -50
   }
   </script>
@@ -109,6 +113,20 @@
             </span>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="fixed-action-btn">
+    <a class="btn-floating btn-large blue" href="#modal">
+      <i class="large material-icons">info_outline</i>
+    </a>
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <h4>Info</h4>
+        <p>Press the PLAY button to begin generating music! You can switch from Major to Minor using the toggle provided. Please make sure you end your text segment with some punctuation (period, question mark, or exclamation point). Enjoy!</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
       </div>
     </div>
   </div>
