@@ -7,7 +7,6 @@
   <!--Import materialize.css-->
   <link type="text/css" rel="stylesheet" href="materialize/css/materialize.css"  media="screen,projection"/>
   <link type="text/css" rel="stylesheet" href="style.css"/>
-  <link type="text/css" rel="stylesheet" href="./ion-rangeslider/css/ion.rangeSlider.css"/>
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -37,18 +36,24 @@
         clickable = false;
         getMusic().playing = !getMusic().playing;
         if (getMusic().playing) {
-          $("#submitButton").text("Stop!");
-          $("#toggleButton").css("background-color", "#d3d3d3");
-          var input = parseInput();
-          prepareBeat(input);
+          if ($("#textBox").val() !== "") {
+            var input = parseInput();
+            $("#submitButton").html("<i class='large material-icons'>stop</i> Stop!");
+            $("#toggleButton").toggleClass("disabled");
+            prepareBeat(input);
+          }
+          else {
+            getMusic().playing = !getMusic().playing;
+          }
           setTimeout(function() { clickable = true; }, 200);
         }
         else {
-          $("#submitButton").text("Ready!");
-          $("#toggleButton").css("background-color", $("#submitButton").css("background-color"));
+          $("#submitButton").html("<i class='large material-icons'>play_arrow</i> Play!");
+          $("#toggleButton").toggleClass("disabled");
           stop();
           setTimeout(function() { clickable = true; }, 200);
         }
+
       }
     });
     $("#toggleButton").click(function() {
@@ -77,7 +82,7 @@
 </head>
 <body>
   <div class="row">
-  <div class="row amber z-depth-2" style = "background-color: #ffa000;">
+  <div class="row amber z-depth-2">
     <div class="col s12 center">
       <h1>NotePadd</h1>
     </div>
@@ -90,8 +95,8 @@
       <div class="col s12 m3">
         <div class="row">
           <div class="col s12">
-            <a class="waves-effect waves-light btn-large bottom" id="submitButton" style="width: 100%">&#9654;</a>
-            <a class="waves-effect waves-light btn-large bottom" style="width: 100%; background-color: #ffa000;">Toggle Major/Minor</a>
+            <a class="blue waves-effect waves-light btn-large bottom" id="submitButton" style="width: 100%"><i class='large material-icons'>play_arrow</i> Play!</a>
+            <a class="amber darken-2 waves-effect waves-light btn-large bottom" id="toggleButton" style="width: 100%">Major</a>
           </div>
         </div>
         <div class="row">
@@ -102,8 +107,6 @@
             <canvas nx="slider" height="325px", width="25px" id="volumeSlider4"></canvas>
             <canvas nx="slider" height="325px", width="25px" id="volumeSlider5"></canvas>
             <canvas nx="slider" height="325px", width="25px" id="volumeSlider6"></canvas>
-            <a class="waves-effect waves-light btn-large bottom" id="toggleButton" style="width: 100%">Major</a>
-            <a class="waves-effect waves-light btn-large bottom" id="submitButton" style="width: 100%">Ready!</a>
           </div>
         </div>
       </div>
