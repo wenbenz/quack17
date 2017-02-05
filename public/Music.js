@@ -24,13 +24,13 @@ $(document).ready(function() {
 });
 
 function prepareBeat(input) {
+  Tone.Master.volume.mute = true;
   if (music.scaleTone === "Major") {
     music.scales = [getScale(0, 4, "majorPentatonic"), getScale(7, 4, "majorPentatonic"), getScale(9, 4, "minorPentatonic"), getScale(5, 4, "majorPentatonic")];
   }
   else {
     music.scales = [getScale(0, 4, "minorPentatonic"), getScale(8, 4, "majorPentatonic"), getScale(5, 4, "minorPentatonic"), getScale(7, 4, "harmonicPentatonic")];
   }
-  console.log(music.scales);
   music.currentScale = 0;
 
   music.bpm = parseTempo(input);
@@ -39,6 +39,7 @@ function prepareBeat(input) {
   music.rhythmQueue = parseRhythms(input);
   music.nextNoteTimer = 0;
 
+  console.log(music.rhythmQueue);
   music.noteQueue = getNotes(input);
 
   loopBeat();
@@ -63,17 +64,29 @@ function beat() {
   if (music.rhythmQueue[0] === "0n") {
     music.nextNoteTimer = 0;
   }
+
   if (music.beatCounter === music.nextNoteTimer) {
     if (music.rhythmQueue[0] === "0n") {
       music.rhythmQueue.shift();
+      if (music.noteQueue.length === 0 || music.rhythmQueue.length === 0) {
+        stop();
+        return;
+      }
+    }
+    if (music.rhythmQueue[0] === undefined) {
+      console.log("Stopped");
+      stop();
     }
     getSynth().triggerAttackRelease(music.scales[music.currentScale][music.noteQueue[0]], music.rhythmQueue[0]);
     music.nextNoteTimer = (music.beatCounter + (DIVISION_CONST / parseInt(music.rhythmQueue[0].substring(0, music.rhythmQueue.length - 1)))) % DIVISION_CONST;
     music.noteQueue.shift();
     music.rhythmQueue.shift();
-    if (music.noteQueue.length === 0 || music.rhythmQueue.length === 0)
+    if (music.noteQueue.length === 0 || music.rhythmQueue.length === 0) {
       stop();
+      return;
+    }
   }
+
   music.beatCounter = (music.beatCounter + 1) % DIVISION_CONST;
   if (music.beatCounter === 0)
     music.currentScale = (music.currentScale + 1) % music.scales.length;
