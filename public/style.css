@@ -1,17 +1,6 @@
-body{
-	color:black;
-	background-color: white;
-	font-style: normal;
-	text-align: center;
-}
-
-h1 {
-	font-family: 'Quicksand', sans-serif;
-}
-
-
 #textBox {
 	position: relative;
+<<<<<<< HEAD
 	width: 626px;
 	height: 194px;
 	resize: none;
@@ -58,11 +47,8 @@ h1 {
     border: 5px solid black;
     margin: 10px;
     float: left;
+=======
+	width: 100%;
+	min-height: 40vh;
+>>>>>>> de7536650759e633c0240dc54015707276d1ed72
 }
-#infoWidgets {
-    width: 730px;
-    height: 100px;
-    border: 5px solid black;
-    margin: 10px;
-    clear: both;
-}*/

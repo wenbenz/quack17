@@ -1,13 +1,15 @@
 var synth = new Tone.Synth();
 
-var monosynth = new Tone.MonoSynth({
-  "oscillator" : {
-    "type" : "sine"
-  },
-  "envelope" : {
-    "attack" : 0.1
-  }
-});
+var monosynth = new Tone.DuoSynth()
+
+// var monosynth = new Tone.MonoSynth({
+//   "oscillator" : {
+//     "type" : "sine"
+//   },
+//   "envelope" : {
+//     "attack" : 0.1
+//   }
+// });
 
 var Tomsynth = new Tone.MembraneSynth({
   "pitchDecay":0.05,
@@ -22,6 +24,10 @@ var Tomsynth = new Tone.MembraneSynth({
     "release":1.4,
     "attackCurve":"exponential"
   }
+});
+
+var kickSample = new Tone.Sampler("./audio/kick.wav", function(){
+	//repitch the sample down a half step
 });
 
 var Kicksynth = new Tone.MembraneSynth({
@@ -40,6 +46,10 @@ var Kicksynth = new Tone.MembraneSynth({
 });
 
 var Noisesynth = new Tone.NoiseSynth();
+
+function getKickSample() {
+  return kickSample;
+}
 
 function getTomsynth() {
   return Tomsynth;

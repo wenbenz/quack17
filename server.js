@@ -20,7 +20,7 @@ app.get(['/', '/index.html', '/index'], function(req, res) {
 
 app.get('/rand/:seed',function(req,res){
 	var random = {};
-	random.val = rand(req.params.seed);
+	random.val = rand(req.params.seed).range(3);
 	res.send(random);
 })
 
