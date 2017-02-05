@@ -33,7 +33,6 @@
       }
     });
     volumeSlider.on('*', function(data) { adjustVolume(data); });
-    meter.on();
     // vol.mute(true);
     // vol.Volume(-50); //data in volumeSlider is a float from 0 - 1; max volume would be 0dBs, min would be -50
   }
@@ -50,7 +49,7 @@
       <canvas nx="waveform" id="waveform"></canvas> -->
       <canvas nx="button" id="submitButton" ></canvas>
       <canvas nx="slider" id="volumeSlider"></canvas>
-      <canvas nx="metro" id="meter"></canvas>
+      <canvas nx="metro" id="metro"></canvas>
     </div>
 
   </br></br>
