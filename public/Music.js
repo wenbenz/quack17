@@ -96,6 +96,8 @@ function beat() {
 function stop() {
   clearInterval(music.loop);
   music.playing = false;
+  $("#submitButton").html("<i class='large material-icons'>play_arrow</i> Play!");
+  $("#toggleButton").toggleClass("disabled");
 }
 
 function adjustVolume(data) {
