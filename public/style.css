@@ -1,5 +1,6 @@
 #textBox {
 	position: relative;
 	width: 100%;
-	min-height: 40vh;
+	min-height: 60vh;
+	font-size: 16pt;
 }
