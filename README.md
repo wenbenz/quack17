@@ -1,5 +1,7 @@
 # Note Padd
-QHack 2017 hack (yes, 'quacks' was intentional)
+QHack 2017 hack
+
+![Notepadd](https://github.com/wenbenz/quacks17/public/logo.png "Notepadd")
 
 What happens when you throw 3 Carleton students into a 36 hour hackathon with a Waterloo student? For us, it was Note Padd (tripple entendre - can you find all 3 meanings?), a web application that takes text and composes a song from it.
 
