@@ -5,6 +5,11 @@
 	font-size: 16pt;
 }
 
+textarea {
+	resize: none;
+	outline: none;
+	overflow: scroll;
+}
 /*
 #textBox {
 	position: relative;
