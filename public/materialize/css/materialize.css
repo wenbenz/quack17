@@ -5438,7 +5438,7 @@ button.btn-floating {
 
 .modal-overlay {
   position: fixed;
-  z-index: 999;
+  z-index: 1;
   top: -100px;
   left: 0;
   bottom: 0;
