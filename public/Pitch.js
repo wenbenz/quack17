@@ -16,7 +16,7 @@ function displace(note,stress,delta){
 }
 
 /**
- * Returns an array of notes to correspond to word 
+ * Returns an array of notes to correspond to word
  * requires: word is an array
  */
 function getWordNotes(word){

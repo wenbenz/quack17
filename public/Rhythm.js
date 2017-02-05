@@ -7,13 +7,16 @@ function parseRhythms(input) {
 					rhythmQueue.push((4 * input[i][j].length).toString() + "n");
 					if (input[i][j][k].substring(input[i][j][k].length - 1) === "."
 					|| input[i][j][k].substring(input[i][j][k].length - 1) === "?"
-					|| input[i][j][k].substring(input[i][j][k].length - 1) === "!") {
+					|| input[i][j][k].substring(input[i][j][k].length - 1) === "!"
+					|| input[i][j][k].substring(input[i][j][k].length - 1) === ","
+					|| input[i][j][k].substring(input[i][j][k].length - 1) === ":"
+					|| input[i][j][k].substring(input[i][j][k].length - 1) === ";") {
 						rhythmQueue.push("0n");
 					}
 				}
 			}
 			else {
-				for (k in 6) {
+				for (k in 5) {
 					rhythmQueue.push("20n");
 				}
 			}
