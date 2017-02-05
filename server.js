@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var rand = require('random-seed');
 
 const ROOT = "./public";
 
@@ -16,6 +17,12 @@ app.use(function(req, res, next) {
 app.get(['/', '/index.html', '/index'], function(req, res) {
 	res.sendFile("/index.html", {root: ROOT});
 });
+
+app.get('/rand/:seed',function(req,res){
+	var random = {};
+	random.val = rand(req.params.seed).range(3);
+	res.send(random);
+})
 
 //send all other static files
 app.use(express.static(ROOT));
