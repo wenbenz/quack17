@@ -37,14 +37,31 @@
         clickable = false;
         getMusic().playing = !getMusic().playing;
         if (getMusic().playing) {
+          $("#submitButton").text("Stop!");
+          $("#toggleButton").css("background-color", "#d3d3d3");
           var input = parseInput();
           prepareBeat(input);
-          setTimeout(function() { clickable = true; }, 500);
+          setTimeout(function() { clickable = true; }, 200);
         }
         else {
+          $("#submitButton").text("Ready!");
+          $("#toggleButton").css("background-color", $("#submitButton").css("background-color"));
           stop();
-          setTimeout(function() { clickable = true; }, 500);
+          setTimeout(function() { clickable = true; }, 200);
         }
+      }
+    });
+    $("#toggleButton").click(function() {
+      if (clickable) {
+        clickable = false;
+        if (!getMusic().playing) {
+          if (getMusic().scaleTone === "Major")
+            getMusic().scaleTone = "Minor";
+          else
+            getMusic().scaleTone = "Major";
+          $("#toggleButton").text(getMusic().scaleTone);
+        }
+        setTimeout(function() { clickable = true; }, 200);
       }
     });
     volumeSlider.on('*', function(data) { adjustVolume(data); });
@@ -74,7 +91,7 @@
         </div>
         <div class="row">
           <div class="col s12">
-            <a class="waves-effect waves-light btn-large bottom" style="width: 100%">Toggle Major/Minor</a>
+            <a class="waves-effect waves-light btn-large bottom" id="toggleButton" style="width: 100%">Major</a>
             <a class="waves-effect waves-light btn-large bottom" id="submitButton" style="width: 100%">Ready!</a>
           </div>
         </div>

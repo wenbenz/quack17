@@ -20,7 +20,7 @@ getNoisesynth().chain( volNoisesynth, Tone.Master); //chain events
 $(document).ready(function() {
   music.timeSignature = 4;
   music.playing = false;
-  music.scaleTone = "Minor";
+  music.scaleTone = "Major";
 });
 
 function prepareBeat(input) {
