@@ -19,6 +19,7 @@ getNoisesynth().chain( volNoisesynth, Tone.Master); //chain events
 
 $(document).ready(function() {
   music.timeSignature = 4;
+  music.playing = false;
 });
 
 function prepareBeat(input) {
@@ -80,6 +81,7 @@ function beat() {
 
 function stop() {
   clearInterval(music.loop);
+  music.playing = false;
 }
 
 function adjustVolume(data) {
