@@ -32,7 +32,7 @@
   var clickable = true;
   nx.onload = function() {
     textBox.val = "This is my message";
-    submitButton.on('*', function() {
+    $("#submitButton").click(function() {
       if (clickable) {
         clickable = false;
         getMusic().playing = !getMusic().playing;

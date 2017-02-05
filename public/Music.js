@@ -39,7 +39,6 @@ function prepareBeat(input) {
   music.rhythmQueue = parseRhythms(input);
   music.nextNoteTimer = 0;
 
-  console.log(music.rhythmQueue);
   music.noteQueue = getNotes(input);
 
   loopBeat();
@@ -50,6 +49,10 @@ function loopBeat() {
 }
 
 function beat() {
+  if (music.noteQueue.length === 0 || music.rhythmQueue.length === 0) {
+    stop();
+    return;
+  }
   if (music.beatCounter === 0) {
     getKicksynth().triggerAttackRelease("8n");
     getMonosynth().triggerAttackRelease(music.scales[music.currentScale][0].substring(0, music.scales[music.currentScale][0].length - 1) + "3", "1n");
@@ -72,10 +75,6 @@ function beat() {
         stop();
         return;
       }
-    }
-    if (music.rhythmQueue[0] === undefined) {
-      console.log("Stopped");
-      stop();
     }
     getSynth().triggerAttackRelease(music.scales[music.currentScale][music.noteQueue[0]], music.rhythmQueue[0]);
     music.nextNoteTimer = (music.beatCounter + (DIVISION_CONST / parseInt(music.rhythmQueue[0].substring(0, music.rhythmQueue.length - 1)))) % DIVISION_CONST;
