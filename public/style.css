@@ -1,6 +1,13 @@
 #textBox {
 	position: relative;
-<<<<<<< HEAD
+	width: 100%;
+	min-height: 60vh;
+	font-size: 16pt;
+}
+
+/*
+#textBox {
+	position: relative;
 	width: 626px;
 	height: 194px;
 	resize: none;
@@ -32,7 +39,7 @@
 	position: absolute;
 	left: 225px;
 	top: 173px;
-}
+}*/
 
 /*#textBox {
     width: 500px;
@@ -49,6 +56,11 @@
     float: left;
 =======
 	width: 100%;
+<<<<<<< HEAD
 	min-height: 40vh;
 >>>>>>> de7536650759e633c0240dc54015707276d1ed72
+=======
+	min-height: 60vh;
+	font-size: 16pt;
+>>>>>>> 2b3b85ba7aad1bf535a486125f6b8927e8fe11ae
 }
