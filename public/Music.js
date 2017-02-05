@@ -25,18 +25,14 @@ $(document).ready(function() {
 function prepareBeat(input) {
   music.scales = [getScale(0, 4, "majorPentatonic"), getScale(7, 4, "majorPentatonic"), getScale(9, 4, "minorPentatonic"), getScale(5, 4, "majorPentatonic")];
   music.currentScale = 0;
-  console.log(music.scales[music.currentScale]);
 
   music.bpm = parseTempo(input);
-  console.log("BPM: " + music.bpm);
   music.beatCounter = 0;
 
   music.rhythmQueue = parseRhythms(input);
-  console.log("Rhythms: " + music.rhythmQueue);
   music.nextNoteTimer = 0;
 
   music.noteQueue = getNotes(input);
-  console.log("Notes: " + music.noteQueue);
 
   loopBeat();
 }
@@ -49,7 +45,6 @@ function beat() {
   if (music.beatCounter === 0) {
     getKicksynth().triggerAttackRelease("8n");
     getMonosynth().triggerAttackRelease(music.scales[music.currentScale][0].substring(0, music.scales[music.currentScale][0].length - 1) + "3", "1n");
-    console.log("Scale: " + music.currentScale);
   }
   else if (music.beatCounter % (DIVISION_CONST / (music.timeSignature * 2)) === 0) {
     getNoisesynth().triggerAttackRelease("8n");
@@ -62,13 +57,11 @@ function beat() {
     music.nextNoteTimer = 0;
   }
   if (music.beatCounter === music.nextNoteTimer) {
-    console.log("Note: " + music.noteQueue[0] + ", " + music.rhythmQueue[0]);
     if (music.rhythmQueue[0] === "0n") {
       music.rhythmQueue.shift();
     }
     getSynth().triggerAttackRelease(music.scales[music.currentScale][music.noteQueue[0]], music.rhythmQueue[0]);
     music.nextNoteTimer = (music.beatCounter + (DIVISION_CONST / parseInt(music.rhythmQueue[0].substring(0, music.rhythmQueue.length - 1)))) % DIVISION_CONST;
-    console.log(music.nextNoteTimer);
     music.noteQueue.shift();
     music.rhythmQueue.shift();
     if (music.noteQueue.length === 0 || music.rhythmQueue.length === 0)
