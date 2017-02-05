@@ -1,71 +1,15 @@
+.control-btn{
+	width:100%;
+	display: inline-flex;
+	justify-content: center;
+}
+
 #textBox {
 	position: relative;
 	width: 100%;
 	min-height: 60vh;
 	font-size: 16pt;
-}
-
-textarea {
 	resize: none;
 	outline: none;
-	overflow: scroll;
-}
-/*
-#textBox {
-	position: relative;
-	width: 626px;
-	height: 194px;
-	resize: none;
-  outline: none;
-	margin: auto;
-	width: 50%;
-	border: 5px solid black;
-}
-
-#ClickToToneIt {
-	position: absolute;
-	right: 223px;
-	top: 145px;
-	font-family: 'Quicksand', sans-serif;
-}
-
-#submitButton {
-	position: absolute;
-	right: 250px;
-}
-
-#volumeSlider {
-	position: absolute;
-	right: 259px;
-	top: 180px;
-}
-
-#metro {
-	position: absolute;
-	left: 225px;
-	top: 173px;
-}*/
-
-/*#textBox {
-    width: 500px;
-    height: 200px;
-    border: 5px solid black;
-		margin: auto;
-		width: 50%;
-}*/
-/*#canvasWidgets {
-    width: 200px;
-    height: 200px;
-    border: 5px solid black;
-    margin: 10px;
-    float: left;
-=======
-	width: 100%;
-<<<<<<< HEAD
-	min-height: 40vh;
->>>>>>> de7536650759e633c0240dc54015707276d1ed72
-=======
-	min-height: 60vh;
-	font-size: 16pt;
->>>>>>> 2b3b85ba7aad1bf535a486125f6b8927e8fe11ae
+	overflow: auto;
 }
