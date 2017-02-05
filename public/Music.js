@@ -1,5 +1,5 @@
 var volSynth = new Tone.Volume(-10);
-var volMonosynth = new Tone.Volume(volSynth.volume.value - 18);
+var volMonosynth = new Tone.Volume(volSynth.volume.value + 5);
 var volTomsynth = new Tone.Volume(volSynth.volume.value - 12);
 var volKicksynth = new Tone.Volume(volSynth.volume.value + 10);
 var volNoisesynth = new Tone.Volume(volSynth.volume.value - 11);
@@ -19,6 +19,7 @@ getNoisesynth().chain( volNoisesynth, Tone.Master); //chain events
 
 $(document).ready(function() {
   music.timeSignature = 4;
+  music.playing = false;
 });
 
 function prepareBeat(input) {
@@ -40,12 +41,6 @@ function prepareBeat(input) {
   loopBeat();
 }
 
-function getNotes() {
-  var arr = [];
-  arr.push("C4");
-  return arr;
-}
-
 function loopBeat() {
   music.loop = setInterval(beat, 1000 / music.bpm);
 }
@@ -53,6 +48,8 @@ function loopBeat() {
 function beat() {
   if (music.beatCounter === 0) {
     getKicksynth().triggerAttackRelease("8n");
+    getMonosynth().triggerAttackRelease(music.scales[music.currentScale][0].substring(0, music.scales[music.currentScale][0].length - 1) + "3", "1n");
+    console.log("Scale: " + music.currentScale);
   }
   else if (music.beatCounter % (DIVISION_CONST / (music.timeSignature * 2)) === 0) {
     getNoisesynth().triggerAttackRelease("8n");
@@ -69,10 +66,10 @@ function beat() {
     if (music.rhythmQueue[0] === "0n") {
       music.rhythmQueue.shift();
     }
-    getSynth().triggerAttackRelease(music.noteQueue[0], music.rhythmQueue[0]);
+    getSynth().triggerAttackRelease(music.scales[music.currentScale][music.noteQueue[0]], music.rhythmQueue[0]);
     music.nextNoteTimer = (music.beatCounter + (DIVISION_CONST / parseInt(music.rhythmQueue[0].substring(0, music.rhythmQueue.length - 1)))) % DIVISION_CONST;
     console.log(music.nextNoteTimer);
-    //music.noteQueue.shift();
+    music.noteQueue.shift();
     music.rhythmQueue.shift();
     if (music.noteQueue.length === 0 || music.rhythmQueue.length === 0)
       stop();
@@ -84,6 +81,7 @@ function beat() {
 
 function stop() {
   clearInterval(music.loop);
+  music.playing = false;
 }
 
 function adjustVolume(data) {
