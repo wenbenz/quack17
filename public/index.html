@@ -70,12 +70,12 @@
         setTimeout(function() { clickable = true; }, 200);
       }
     });
-    volumeSlider1.on('*', function(data) { adjustMainVolume(data); });
-    volumeSlider2.on('*', function(data) { adjustMonosynthVolume(data); });
-    volumeSlider3.on('*', function(data) { adjustVolume(data); });
-    volumeSlider4.on('*', function(data) { adjustVolume(data); });
-    volumeSlider5.on('*', function(data) { adjustVolume(data); });
-    volumeSlider6.on('*', function(data) { adjustVolume(data); });
+    volumeSlider1.on('*', function(data) { adjustVolume(volSynth, data); });
+    volumeSlider2.on('*', function(data) { adjustVolume(volMonosynth, data); });
+    volumeSlider3.on('*', function(data) { adjustVolume(volKickdrum, data); });
+    volumeSlider4.on('*', function(data) { adjustVolume(volTomsynth, data); });
+    volumeSlider5.on('*', function(data) { adjustVolume(volNoisesynth, data); });
+    volumeSlider6.on('*', function(data) { adjustVolume(Tone.Master, data); });
     // vol.mute(true);
     // vol.Volume(-50); //data in volumeSlider is a float from 0 - 1; max volume would be 0dBs, min would be -50
   }
@@ -126,7 +126,7 @@
         <p>Press the PLAY button to begin generating music! You can switch from Major to Minor using the toggle provided. Please make sure you end your text segment with some punctuation (period, question mark, or exclamation point). Enjoy!</p>
       </div>
       <div class="modal-footer">
-        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
       </div>
     </div>
   </div>

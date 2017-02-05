@@ -102,12 +102,12 @@ function stop() {
   $("#toggleButton").toggleClass("disabled");
 }
 
-function adjustMainVolume(data) {
+function adjustVolume(source, data) {
   if (data.value === 0) {
-    Tone.Master.volume.value = -100;
+    source.volume.value = -100;
   }
   else {
-    Tone.Master.volume.value = data.value*40 - 40;
+    source.volume.value = data.value*40 - 40;
   }
 }
 
