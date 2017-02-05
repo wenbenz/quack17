@@ -20,10 +20,17 @@ getNoisesynth().chain( volNoisesynth, Tone.Master); //chain events
 $(document).ready(function() {
   music.timeSignature = 4;
   music.playing = false;
+  music.scaleTone = "Minor";
 });
 
 function prepareBeat(input) {
-  music.scales = [getScale(0, 4, "majorPentatonic"), getScale(7, 4, "majorPentatonic"), getScale(9, 4, "minorPentatonic"), getScale(5, 4, "majorPentatonic")];
+  if (music.scaleTone === "Major") {
+    music.scales = [getScale(0, 4, "majorPentatonic"), getScale(7, 4, "majorPentatonic"), getScale(9, 4, "minorPentatonic"), getScale(5, 4, "majorPentatonic")];
+  }
+  else {
+    music.scales = [getScale(0, 4, "minorPentatonic"), getScale(8, 4, "majorPentatonic"), getScale(5, 4, "minorPentatonic"), getScale(7, 4, "harmonicPentatonic")];
+  }
+  console.log(music.scales);
   music.currentScale = 0;
 
   music.bpm = parseTempo(input);
