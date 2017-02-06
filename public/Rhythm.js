@@ -1,17 +1,17 @@
 function parseRhythms(input) {
 	var rhythmQueue = [];
+	var lastChar = "";
+	var pauseChars = [".", "?", "!", ",", ":", ";", "-"];
 	for (i in input) {
 		for (j in input[i]) {
 			if (input[i][j].length < 5) {
 				for (k in input[i][j]) {
 					rhythmQueue.push((4 * input[i][j].length).toString() + "n");
-					if (input[i][j][k].substring(input[i][j][k].length - 1) === "."
-					|| input[i][j][k].substring(input[i][j][k].length - 1) === "?"
-					|| input[i][j][k].substring(input[i][j][k].length - 1) === "!"
-					|| input[i][j][k].substring(input[i][j][k].length - 1) === ","
-					|| input[i][j][k].substring(input[i][j][k].length - 1) === ":"
-					|| input[i][j][k].substring(input[i][j][k].length - 1) === ";") {
-						rhythmQueue.push("0n");
+					lastChar = input[i][j][k].substring(input[i][j][k].length - 1);
+					for (l in pauseChars) {
+						if (lastChar === pauseChars[l]) {
+							rhythmQueue.push("0n");
+						}
 					}
 				}
 			}
