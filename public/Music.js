@@ -9,7 +9,7 @@ var volKickdrum = new Tone.Volume(volSynth.volume.value + 6);
 
 var music = {};
 var scale;
-let DIVISION_CONST = 240;
+var DIVISION_CONST = 240;
 
 //reverb effect on high hats
 //var freeverb = new Tone.JCReverb(0.001);
