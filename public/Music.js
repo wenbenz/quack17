@@ -9,7 +9,7 @@ var volKickdrum = new Tone.Volume(volSynth.volume.value + 6);
 
 var music = {};
 var scale;
-var DIVISION_CONST = 240;
+var DIVISION_CONST = 48;
 
 //reverb effect on high hats
 //var freeverb = new Tone.JCReverb(0.001);
@@ -49,7 +49,7 @@ function prepareBeat(input) {
 }
 
 function loopBeat() {
-  music.loop = setInterval(beat, 1000 / music.bpm);
+  music.loop = setInterval(beat, 5000 / music.bpm);
 }
 
 function beat() {

@@ -4,7 +4,7 @@ function parseRhythms(input) {
 	var pauseChars = [".", "?", "!", ",", ":", ";", "-"];
 	for (i in input) {
 		for (j in input[i]) {
-			if (input[i][j].length < 5) {
+			if (input[i][j].length < 4) {
 				for (k in input[i][j]) {
 					rhythmQueue.push((4 * input[i][j].length).toString() + "n");
 					lastChar = input[i][j][k].substring(input[i][j][k].length - 1);
@@ -16,8 +16,8 @@ function parseRhythms(input) {
 				}
 			}
 			else {
-				for (k in 5) {
-					rhythmQueue.push("20n");
+				for (k in 4) {
+					rhythmQueue.push("16n");
 				}
 			}
 
